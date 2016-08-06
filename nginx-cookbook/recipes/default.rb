@@ -10,7 +10,6 @@
 include_recipe 'apt::default'
 include_recipe 'php'
 include_recipe 'nginx'
-include_recipe 'mariadb::server'
 include_recipe 'nginx-cookbook::firewall'
 
 
@@ -20,6 +19,10 @@ include_recipe 'nginx-cookbook::firewall'
 #   mode '0755'
 #   action :create
 # end
+
+package 'mariadb-client' do
+	action :install
+end
 
 package ['php7.0-fpm'] do
   action :install
@@ -37,9 +40,9 @@ package ['php7.0-mysql'] do
 	action :install
 end
 
-ifconfig "192.168.10.2" do
-  device "enp0s8"
-end
+# ifconfig "192.168.10.2" do
+#  device "enp0s8"
+# end
 
 # cookbook_file "#{node[:nginx_document_root]}index.php" do
 # 	source "index.php"
