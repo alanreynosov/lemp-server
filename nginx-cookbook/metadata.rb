@@ -9,6 +9,6 @@ version          '0.1.0'
 
 depends 'apt'
 depends 'php'
-depends 'mariadb'
+# depends 'mariadb'
 depends 'firewall'
 depends 'nginx'
