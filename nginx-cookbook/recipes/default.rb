@@ -44,10 +44,10 @@ end
 #  device "enp0s8"
 # end
 
-# cookbook_file "#{node[:nginx_document_root]}index.php" do
-# 	source "index.php"
-# 	mode "0644"
-# end
+cookbook_file "#{node[:nginx_document_root]}index.php" do
+ 	source "index.php"
+ 	mode "0644"
+ end
 
 
 template "/etc/nginx/sites-available/#{node[:nginx_host_name]}.conf" do
