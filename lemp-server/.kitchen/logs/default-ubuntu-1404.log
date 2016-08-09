@@ -1,0 +1,51 @@
+I, [2016-08-07T14:33:36.860179 #48999]  INFO -- default-ubuntu-1404: -----> Converging <default-ubuntu-1404>...
+I, [2016-08-07T14:33:36.860790 #48999]  INFO -- default-ubuntu-1404: Preparing files for transfer
+I, [2016-08-07T14:33:36.860938 #48999]  INFO -- default-ubuntu-1404: Preparing dna.json
+I, [2016-08-07T14:33:36.861398 #48999]  INFO -- default-ubuntu-1404: Resolving cookbook dependencies with Berkshelf 4.3.3...
+I, [2016-08-07T14:33:36.945344 #48999]  INFO -- default-ubuntu-1404: Removing non-cookbook files before transfer
+I, [2016-08-07T14:33:36.948420 #48999]  INFO -- default-ubuntu-1404: Preparing validation.pem
+I, [2016-08-07T14:33:36.950042 #48999]  INFO -- default-ubuntu-1404: Preparing client.rb
+I, [2016-08-07T14:33:37.165096 #48999]  INFO -- default-ubuntu-1404: -----> Chef Omnibus installation detected (install only if missing)
+I, [2016-08-07T14:33:37.269560 #48999]  INFO -- default-ubuntu-1404: Transferring files to <default-ubuntu-1404>
+I, [2016-08-07T14:33:40.838424 #48999]  INFO -- default-ubuntu-1404: Starting Chef Client, version 12.12.15
+I, [2016-08-07T14:33:42.733780 #48999]  INFO -- default-ubuntu-1404: resolving cookbooks for run list: ["lemp-server::default"]
+I, [2016-08-07T14:33:42.806163 #48999]  INFO -- default-ubuntu-1404: Synchronizing Cookbooks:
+I, [2016-08-07T14:33:42.812563 #48999]  INFO -- default-ubuntu-1404:   - lemp-server (0.1.0)
+I, [2016-08-07T14:33:42.813518 #48999]  INFO -- default-ubuntu-1404: Installing Cookbook Gems:
+I, [2016-08-07T14:33:42.814162 #48999]  INFO -- default-ubuntu-1404: Compiling Cookbooks...
+I, [2016-08-07T14:33:42.824177 #48999]  INFO -- default-ubuntu-1404: Converging 19 resources
+I, [2016-08-07T14:33:42.825158 #48999]  INFO -- default-ubuntu-1404: Recipe: lemp-server::default
+I, [2016-08-07T14:33:42.829451 #48999]  INFO -- default-ubuntu-1404:   * directory[/srv/www/] action create (up to date)
+I, [2016-08-07T14:33:42.835132 #48999]  INFO -- default-ubuntu-1404:   * cookbook_file[/srv/www/index.php] action create (up to date)
+I, [2016-08-07T14:33:42.877751 #48999]  INFO -- default-ubuntu-1404:   * apt_package[nginx] action install (up to date)
+I, [2016-08-07T14:33:42.917932 #48999]  INFO -- default-ubuntu-1404:   * apt_package[php5] action install (up to date)
+I, [2016-08-07T14:33:42.960383 #48999]  INFO -- default-ubuntu-1404:   * apt_package[php5-common] action install (up to date)
+I, [2016-08-07T14:33:43.002512 #48999]  INFO -- default-ubuntu-1404:   * apt_package[php5-cli] action install (up to date)
+I, [2016-08-07T14:33:43.044390 #48999]  INFO -- default-ubuntu-1404:   * apt_package[php5-json] action install (up to date)
+I, [2016-08-07T14:33:43.085254 #48999]  INFO -- default-ubuntu-1404:   * apt_package[php5-fpm] action install (up to date)
+I, [2016-08-07T14:33:43.127277 #48999]  INFO -- default-ubuntu-1404:   * apt_package[php5-readline] action install (up to date)
+I, [2016-08-07T14:33:43.167381 #48999]  INFO -- default-ubuntu-1404:   * apt_package[php5-mysql] action install (up to date)
+I, [2016-08-07T14:33:43.179633 #48999]  INFO -- default-ubuntu-1404:   * service[php5-fpm] action enable (up to date)
+I, [2016-08-07T14:33:43.239808 #48999]  INFO -- default-ubuntu-1404:   * service[php5-fpm] action start
+I, [2016-08-07T14:33:43.239867 #48999]  INFO -- default-ubuntu-1404:     - start service service[php5-fpm]
+I, [2016-08-07T14:33:43.294951 #48999]  INFO -- default-ubuntu-1404:   * apt_package[mariadb-client] action install (up to date)
+I, [2016-08-07T14:33:43.295005 #48999]  INFO -- default-ubuntu-1404:   * file[/etc/nginx/sites-enabled/default] action delete (up to date)
+I, [2016-08-07T14:33:43.295025 #48999]  INFO -- default-ubuntu-1404:   * file[/etc/nginx/sites-enabled/000-default] action delete (up to date)
+I, [2016-08-07T14:33:43.366983 #48999]  INFO -- default-ubuntu-1404:   * apt_package[php5-mysql] action install (up to date)
+I, [2016-08-07T14:33:43.375620 #48999]  INFO -- default-ubuntu-1404:   * template[/etc/nginx/sites-available/elpinerodelacuenca.com.mx.conf] action create (up to date)
+I, [2016-08-07T14:33:43.378025 #48999]  INFO -- default-ubuntu-1404:   * link[/etc/nginx/sites-enabled/elpinerodelacuenca.com.mx.conf] action create (up to date)
+I, [2016-08-07T14:33:45.556495 #48999]  INFO -- default-ubuntu-1404:   * service[nginx] action restart
+I, [2016-08-07T14:33:45.556606 #48999]  INFO -- default-ubuntu-1404:     - restart service service[nginx]
+I, [2016-08-07T14:33:45.563388 #48999]  INFO -- default-ubuntu-1404:   * service[php5-fpm] action reload (up to date)
+I, [2016-08-07T14:33:45.593423 #48999]  INFO -- default-ubuntu-1404: 
+I, [2016-08-07T14:33:45.597560 #48999]  INFO -- default-ubuntu-1404: Running handlers:
+I, [2016-08-07T14:33:45.600533 #48999]  INFO -- default-ubuntu-1404: Running handlers complete
+I, [2016-08-07T14:33:45.600849 #48999]  INFO -- default-ubuntu-1404: 
+I, [2016-08-07T14:33:45.601262 #48999]  INFO -- default-ubuntu-1404: Deprecated features used!
+I, [2016-08-07T14:33:45.601727 #48999]  INFO -- default-ubuntu-1404:   Cloning resource attributes for service[php5-fpm] from prior resource (CHEF-3694)
+I, [2016-08-07T14:33:45.602038 #48999]  INFO -- default-ubuntu-1404: Previous service[php5-fpm]: /tmp/kitchen/cache/cookbooks/lemp-server/recipes/default.rb:58:in `from_file'
+I, [2016-08-07T14:33:45.602385 #48999]  INFO -- default-ubuntu-1404: Current  service[php5-fpm]: /tmp/kitchen/cache/cookbooks/lemp-server/recipes/default.rb:91:in `from_file' at 1 location:
+I, [2016-08-07T14:33:45.603001 #48999]  INFO -- default-ubuntu-1404:     - /tmp/kitchen/cache/cookbooks/lemp-server/recipes/default.rb:91:in `from_file'
+I, [2016-08-07T14:33:45.603066 #48999]  INFO -- default-ubuntu-1404: 
+I, [2016-08-07T14:33:45.603275 #48999]  INFO -- default-ubuntu-1404: Chef Client finished, 2/20 resources updated in 04 seconds
+I, [2016-08-07T14:33:46.861843 #48999]  INFO -- default-ubuntu-1404: Finished converging <default-ubuntu-1404> (0m10.00s).
