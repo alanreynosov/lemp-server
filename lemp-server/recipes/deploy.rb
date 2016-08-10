@@ -6,7 +6,7 @@
 
 
 application '/srv/myapp' do
-  git 'git@github.com:example/myapp.git'
+  git 'git@github.com:example/myapp.git' do
   	deploy_key chef_vault_item('deploy', 'elpinerowp')[:scm][:ssh_key]
   end
 end
