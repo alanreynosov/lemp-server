@@ -1,0 +1,7 @@
+DEPENDENCIES
+  lemp-server
+    path: .
+    metadata: true
+
+GRAPH
+  lemp-server (0.1.0)

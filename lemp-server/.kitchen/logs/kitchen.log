@@ -1,0 +1,3 @@
+I, [2016-08-07T14:33:35.160723 #48999]  INFO -- Kitchen: -----> Starting Kitchen (v1.8.0)
+I, [2016-08-07T14:33:36.860115 #48999]  INFO -- Kitchen: -----> Converging <default-ubuntu-1404>...
+I, [2016-08-07T14:33:46.862236 #48999]  INFO -- Kitchen: -----> Kitchen is finished. (0m11.70s)
