@@ -6,5 +6,5 @@ description 'Installs/Configures lemp-server'
 long_description 'Installs/Configures lemp-server'
 version '0.1.0'
 
-depends	'chef-vault'
-depends 'application'
+# depends	'chef-vault'
+# depends 'application'
