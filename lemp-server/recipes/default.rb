@@ -7,7 +7,7 @@
 # include_recipe 'apt'
 # include_recipe 'php'
 
-output = node.to_yaml
+output = opsworks.to_yaml
 file '/home/ubuntu/node.yaml' do
   content output
 end
