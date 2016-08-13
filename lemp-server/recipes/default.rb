@@ -8,12 +8,16 @@
 # include_recipe 'php'
 
 
- directory "#{node[:nginx_document_root]}" do
+file '~/.ssh/deploy-key' do
+	content node[:deploy]["elpinerowp"][:scm][:ssh_key];
+end
+
+directory "#{node[:nginx_document_root]}" do
    owner "#{node[:nginx_user]}"
    group "#{node[:nginx_group]}"
    mode '0755'
    action :create
- end
+end
 
 cookbook_file "#{node[:nginx_document_root]}index.php" do
  	source "index.php"
