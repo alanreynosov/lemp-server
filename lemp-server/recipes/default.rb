@@ -7,7 +7,7 @@
 # include_recipe 'apt'
 # include_recipe 'php'
 
-output = node.deploy.to_yaml
+output = node[:deploy].to_yaml
 file '/home/ubuntu/node.yaml' do
   content output
 end
