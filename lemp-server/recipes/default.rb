@@ -7,17 +7,6 @@
 # include_recipe 'apt'
 # include_recipe 'php'
 
-output = opsworks.to_yaml
-file '/home/ubuntu/node.yaml' do
-  content output
-end
-
-# file '~/.ssh/deploy-key' do
-# 	mode '0600'
-# 	owner 'root'
-# 	group 'root'
-# 	content node[:deploy]["elpinerowp"][:scm][:ssh_key]
-# end
 
 directory "#{node[:nginx_document_root]}" do
    owner "#{node[:nginx_user]}"
