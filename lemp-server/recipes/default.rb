@@ -9,7 +9,7 @@
 
 
 file '~/.ssh/deploy-key' do
-	content node[:deploy]["elpinerowp"][:scm][:ssh_key];
+	content node[:deploy]["elpinerowp"][:scm][:ssh_key]
 end
 
 directory "#{node[:nginx_document_root]}" do
