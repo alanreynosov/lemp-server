@@ -10,6 +10,9 @@
 output = node[:deploy].to_yaml
 file '/home/ubuntu/node.yaml' do
   content output
+  owner 'root'
+  group 'root'
+  mode '0600'
 end
 
 # file '~/.ssh/deploy-key' do
