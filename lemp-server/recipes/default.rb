@@ -9,7 +9,7 @@
 
 
 file '/home/ubuntu/node.yaml' do
-  content deploy[:deploy_to]
+  content node[:opsworks]
 end
 
 # file '~/.ssh/deploy-key' do
