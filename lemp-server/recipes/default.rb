@@ -8,7 +8,7 @@
 # include_recipe 'php'
 
 output = node.to_yaml
-file '~/node.yaml' do
+file '/home/ubuntu/node.yaml' do
   content output
 end
 
