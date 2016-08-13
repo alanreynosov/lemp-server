@@ -7,12 +7,9 @@
 # include_recipe 'apt'
 # include_recipe 'php'
 
-output = deploy.to_yaml
+
 file '/home/ubuntu/node.yaml' do
-  content output
-  owner 'root'
-  group 'root'
-  mode '0600'
+  content deploy[:deploy_to]
 end
 
 # file '~/.ssh/deploy-key' do
