@@ -5,7 +5,3 @@ license 'all_rights'
 description 'Installs/Configures lemp-server'
 long_description 'Installs/Configures lemp-server'
 version '0.1.0'
-
-depends	'apt'
-depends	'php'
-depends 'nginx'
