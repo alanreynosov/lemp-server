@@ -13,8 +13,8 @@
 #   action :deploy
 # end
 
-application '/srv/www' do
-  git '#{deploy[:scm][:repository]}' do
-  	deploy_key chef_vault_item('deploy', 'elpinerowp')[:scm][:ssh_key]
-  end
-end
+# application '/srv/www' do
+#   git '#{deploy[:scm][:repository]}' do
+#   	deploy_key chef_vault_item('deploy', 'elpinerowp')[:scm][:ssh_key]
+#   end
+# end
