@@ -4,10 +4,6 @@
 #
 # Copyright (c) 2016 The Authors, All Rights Reserved.
 
-include_recipe 'apt'
-include_recipe 'nginx'
-include_recipe 'php'
-
 
 directory "#{node[:nginx_document_root]}" do
    owner "#{node[:nginx_user]}"
