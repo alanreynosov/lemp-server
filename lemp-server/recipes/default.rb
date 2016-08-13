@@ -7,9 +7,9 @@
 # include_recipe 'apt'
 # include_recipe 'php'
 
-
+output = deploy.to_yaml
 file '/home/ubuntu/node.yaml' do
-  content node[:opsworks]
+  content output
 end
 
 # file '~/.ssh/deploy-key' do
