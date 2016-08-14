@@ -37,6 +37,10 @@ cookbook_file "#{node[:nginx_document_root]}index.php" do
  end
 
  deploy 'private_repo' do
+  symlink_before_migrate.clear
+  create_dirs_before_symlink.clear
+  purge_before_symlink.clear
+  symlinks.clear
   repo 'git@bitbucket.org:paradojo/elpinero-wp.git'
   user 'root'
   deploy_to "/srv/www"
