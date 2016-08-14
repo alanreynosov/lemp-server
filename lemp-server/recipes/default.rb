@@ -43,7 +43,7 @@ cookbook_file "#{node[:nginx_document_root]}index.php" do
   symlinks.clear
   repo "#{app['app_source']['url']}"
   user 'root'
-  deploy_to "#{default[:deployment_path]}"
+  deploy_to "#{node[:deployment_path]}"
   ssh_wrapper '/home/ubuntu/git_wrapper.sh'
   action :deploy
 end
