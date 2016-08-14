@@ -4,9 +4,16 @@
 #
 # Copyright (c) 2016 The Authors, All Rights Reserved.
 
-application_name = 'elpinerowp'
+app = search("aws_opsworks_app").first
+Chef::Log.info("********** The app's short name is '#{app['shortname']}' **********")
+Chef::Log.info("********** The app's URL is '#{app['app_source']['url']}' **********")
 
-environment_variables = node[:deploy][application_name][:environment_variables]
+search("aws_opsworks_app").each do |app|
+  Chef::Log.info("********** The app's short name is '#{app['shortname']}' **********")
+  Chef::Log.info("********** The app's URL is '#{app['app_source']['url']}' **********")
+end
+
+
 
 file '/home/ubuntu/test.yml' do
 	content environment_variables
