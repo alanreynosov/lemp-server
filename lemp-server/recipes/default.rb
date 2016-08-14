@@ -6,11 +6,7 @@
 
 application_name = 'elpinerowp'
 
-environment_variables = if node[:deploy][application_name].nil?
-                              {}
-                            else
-                              node[:deploy][application_name][:environment_variables]
-                            end
+environment_variables = node[:deploy][application_name][:environment_variables]
 
 file '/home/ubuntu/test.yml' do
 	content environment_variables
