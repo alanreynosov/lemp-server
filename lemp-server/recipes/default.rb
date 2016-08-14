@@ -13,10 +13,10 @@ search("aws_opsworks_app").each do |app|
   Chef::Log.info("********** The app's URL is '#{app['app_source']['url']}' **********")
 end
 
-
+appdata = app.to_yaml
 
 file '/home/ubuntu/test.yml' do
- 	content app
+ 	content appdata
 end
 
 directory "#{node[:nginx_document_root]}" do
