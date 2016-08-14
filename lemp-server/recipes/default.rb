@@ -15,9 +15,9 @@ end
 
 
 
-# file '/home/ubuntu/test.yml' do
-# 	content environment_variables
-# end
+file '/home/ubuntu/test.yml' do
+ 	content app
+end
 
 directory "#{node[:nginx_document_root]}" do
    owner "#{node[:nginx_user]}"
