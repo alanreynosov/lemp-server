@@ -11,7 +11,7 @@ Chef::Log.info("********** The app's URL is '#{app['app_source']['url']}' ******
 
 appdata = app.to_yaml
 
-file '/home/ubuntu/.ssh/deploy_key' do
+file '/home/ubuntu/.ssh/id_rsa' do
  	content "#{app['app_source']['ssh_key']}"
  	owner 'root'
  	group 'root'
@@ -21,7 +21,7 @@ end
 file "/home/ubuntu/git_wrapper.sh" do
   owner "root"
   mode "0755"
-  content "#!/bin/sh\nexec /usr/bin/ssh -i /home/ubuntu/.ssh/deploy_key \"$@\""
+  content "#!/bin/sh\nexec /usr/bin/ssh -i /home/ubuntu/.ssh/id_rsa \"$@\""
 end
 
 directory "#{node[:nginx_document_root]}" do
