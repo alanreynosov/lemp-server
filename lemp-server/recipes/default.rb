@@ -5,18 +5,14 @@
 # Copyright (c) 2016 The Authors, All Rights Reserved.
 
 app = search("aws_opsworks_app").first
-Chef::Log.info("********** The app's short name is '#{app['shortname']}' **********")
+Chef::Log.info("********** The app's short name is '#{app['app_source']['url']}' **********")
 Chef::Log.info("********** The app's URL is '#{app['app_source']['url']}' **********")
 
-search("aws_opsworks_app").each do |app|
-  Chef::Log.info("********** The app's short name is '#{app['shortname']}' **********")
-  Chef::Log.info("********** The app's URL is '#{app['app_source']['url']}' **********")
-end
 
 appdata = app.to_yaml
 
-file '/home/ubuntu/test.yml' do
- 	content appdata
+file '/home/ubuntu/deploy_key' do
+ 	content "#{app['app_source']['ssh_key']}"
 end
 
 directory "#{node[:nginx_document_root]}" do
