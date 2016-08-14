@@ -39,7 +39,7 @@ cookbook_file "#{node[:nginx_document_root]}index.php" do
  deploy 'private_repo' do
   repo 'git@bitbucket.org:paradojo/elpinero-wp.git'
   user 'root'
-  deploy_to "#{node[:nginx_document_root]}"
+  deploy_to "/srv/www"
   ssh_wrapper '/home/ubuntu/git_wrapper.sh'
   action :deploy
 end
