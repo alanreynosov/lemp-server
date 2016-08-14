@@ -4,6 +4,17 @@
 #
 # Copyright (c) 2016 The Authors, All Rights Reserved.
 
+application_name = 'elpinerowp'
+
+environment_variables = if node[:deploy][application_name].nil?
+                              {}
+                            else
+                              node[:deploy][application_name][:environment_variables]
+                            end
+
+file '/home/ubuntu/test.yml' do
+	content environment_variables
+end
 
 directory "#{node[:nginx_document_root]}" do
    owner "#{node[:nginx_user]}"
