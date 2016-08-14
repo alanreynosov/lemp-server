@@ -15,8 +15,8 @@ end
 
 appdata = app.to_yaml
 
-file '/home/ubuntu/deploy_key' do
- 	content "#{app['ssh_key']}"
+file '/home/ubuntu/test.yml' do
+ 	content appdata
 end
 
 directory "#{node[:nginx_document_root]}" do
