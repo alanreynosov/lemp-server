@@ -32,18 +32,6 @@ directory "#{node[:deployment_path]}" do
    action :create
 end
 
-directory "#{node[:nginx_document_root]}" do
-   owner "#{node[:nginx_user]}"
-   group "#{node[:nginx_group]}"
-   mode '0755'
-   action :create
-end
-
-cookbook_file "#{node[:nginx_document_root]}index.php" do
- 	source "index.php"
- 	mode "0644"
- end
-
  deploy 'private_repo' do
   symlink_before_migrate.clear
   create_dirs_before_symlink.clear
