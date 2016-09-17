@@ -25,6 +25,13 @@ file "/home/ubuntu/git_wrapper.sh" do
   content "#!/bin/sh\nexec /usr/bin/ssh -i /home/ubuntu/.ssh/id_rsa \"$@\""
 end
 
+directory "#{node[:deployment_path]}" do
+   owner "#{node[:nginx_user]}"
+   group "#{node[:nginx_group]}"
+   mode '0755'
+   action :create
+end
+
 directory "#{node[:nginx_document_root]}" do
    owner "#{node[:nginx_user]}"
    group "#{node[:nginx_group]}"
