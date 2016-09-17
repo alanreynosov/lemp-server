@@ -3,6 +3,7 @@
 # Recipe:: default
 #
 # Copyright (c) 2016 The Authors, All Rights Reserved.
+# php5-curl, php5-mysql, php5-gd
 
 app = search("aws_opsworks_app").first
 Chef::Log.info("********** The app's short name is '#{app['app_source']['url']}' **********")
@@ -66,6 +67,10 @@ package ['php5-cli' ] do
 end
 
 package ['php5-json'] do
+  action :install
+end
+
+package ['php5-gd'] do
 	action :install
 end
 
@@ -83,12 +88,7 @@ package ['php5-mysql'] do
 	action :install
 end
 
-service 'php5-fpm' do
-	action [:enable,:start]
-end
-
-
-package 'mariadb-client' do
+package 'mysql-client' do
 	action :install
 end
 
@@ -117,5 +117,8 @@ service 'nginx' do
 end
 
 service 'php5-fpm' do
-	action :reload
+  action :stop
+end
+service 'php5-fpm' do
+	action :start
 end
