@@ -14,13 +14,12 @@ appdata = app.to_yaml
 
 file '/tmp/id_rsa' do
  	content "#{app['app_source']['ssh_key']}"
- 	owner 'ubuntu'
- 	group 'ubuntu'
+ 	owner 'root'
  	mode '600'
 end
 
 file "/tmp/git_wrapper.sh" do
-  owner "ubuntu"
+  owner "root"
   mode "0755"
   content "#!/bin/sh\nexec /usr/bin/ssh -i /tmp/id_rsa \"$@\""
 end
