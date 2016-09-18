@@ -39,6 +39,7 @@ end
   symlinks.clear
   repo "#{app['app_source']['url']}"
   user 'root'
+  group 'root'
   deploy_to "#{node[:deployment_path]}"
   ssh_wrapper '/root/git_wrapper.sh'
   action :deploy
