@@ -42,6 +42,7 @@ end
   deploy_to "#{node[:deployment_path]}"
   ssh_wrapper '/root/git_wrapper.sh'
   action :deploy
+  user : 'paradojo'
 end
 
 package 'nginx' do
