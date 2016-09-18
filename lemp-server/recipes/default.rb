@@ -41,7 +41,6 @@ end
   repo "#{app['app_source']['url']}"
   deploy_to "#{node[:deployment_path]}"
   ssh_wrapper '/root/git_wrapper.sh'
-  deploy_branch 'epadjusted'
   action :deploy
 end
 
