@@ -67,6 +67,10 @@ package ['php5-json'] do
 end
 
 package ['php5-gd'] do
+  action :install
+end
+
+package ['php5-curl'] do
 	action :install
 end
 
