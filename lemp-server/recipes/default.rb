@@ -12,6 +12,10 @@ Chef::Log.info("********** The app's URL is '#{app['app_source']['url']}' ******
 
 appdata = app.to_yaml
 
+file '/ubuntu/deployment.yml' do
+  content appdata
+end
+
 file '/root/.ssh/id_rsa' do
  	content "#{app['app_source']['ssh_key']}"
  	mode '600'
@@ -37,6 +41,7 @@ end
   repo "#{app['app_source']['url']}"
   deploy_to "#{node[:deployment_path]}"
   ssh_wrapper '/root/git_wrapper.sh'
+  deploy_branch 
   action :deploy
 end
 
