@@ -12,17 +12,17 @@ Chef::Log.info("********** The app's URL is '#{app['app_source']['url']}' ******
 
 appdata = app.to_yaml
 
-file '/home/ubuntu/.ssh/id_rsa' do
+file '/root/.ssh/id_rsa' do
  	content "#{app['app_source']['ssh_key']}"
  	owner 'root'
  	group 'root'
  	mode '600'
 end
 
-file "/home/ubuntu/git_wrapper.sh" do
+file "/root/git_wrapper.sh" do
   owner "root"
   mode "0755"
-  content "#!/bin/sh\nexec /usr/bin/ssh -i /home/ubuntu/.ssh/id_rsa \"$@\""
+  content "#!/bin/sh\nexec /usr/bin/ssh -i /root/.ssh/id_rsa \"$@\""
 end
 
 directory "#{node[:deployment_path]}" do
@@ -40,7 +40,7 @@ end
   repo "#{app['app_source']['url']}"
   user 'root'
   deploy_to "#{node[:deployment_path]}"
-  ssh_wrapper '/home/ubuntu/git_wrapper.sh'
+  ssh_wrapper '/root/git_wrapper.sh'
   action :deploy
 end
 
