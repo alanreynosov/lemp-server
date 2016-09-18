@@ -12,7 +12,7 @@ Chef::Log.info("********** The app's URL is '#{app['app_source']['url']}' ******
 
 appdata = app.to_yaml
 
-file '/ubuntu/deployment.yml' do
+file '/home/ubuntu/deployment.yml' do
   content appdata
 end
 
