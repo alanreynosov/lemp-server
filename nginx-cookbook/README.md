@@ -1,18 +1,20 @@
 # nginx-cookbook Cookbook
 
-TODO: Enter the cookbook description here.
+TODO: Install a lemp server, currently works only for ubuntu 16.04.
 
 e.g.
-This cookbook makes your favorite breakfast sandwich.
+This cookbook will setup a LEMP server ready to lunch.
 
 ## Requirements
 
-TODO: List your cookbook requirements. Be sure to include any requirements this cookbook has on platforms, libraries, other cookbooks, packages, operating systems, etc.
+Ubuntu 16.04
+Chef 12
 
 e.g.
 ### Platforms
 
-- SandwichOS
+- Ubuntu 16.04
+- Centos 7 (soon)
 
 ### Chef
 
@@ -20,7 +22,7 @@ e.g.
 
 ### Cookbooks
 
-- `toaster` - nginx-cookbook needs toaster to brown your bagel.
+- `nginx-cookbook` - set this cookbook as default, and enjoy your coffee.
 
 ## Attributes
 
@@ -37,8 +39,8 @@ e.g.
     <th>Default</th>
   </tr>
   <tr>
-    <td><tt>['nginx-cookbook']['bacon']</tt></td>
-    <td>Boolean</td>
+    <td><tt>['nginx-cookbook']['nginx_user']</tt></td>
+    <td>'www-data'</td>
     <td>whether to include bacon</td>
     <td><tt>true</tt></td>
   </tr>
