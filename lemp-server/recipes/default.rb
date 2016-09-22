@@ -45,6 +45,13 @@ end
   user  'root'
 end
 
+directory "#{node[:nginx_document_root]}" do
+  owner 'www-data'
+  group 'www-data'
+  mode '0755'
+  action :create
+end
+
 package 'nginx' do
 	action 'install'
 end
