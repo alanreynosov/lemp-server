@@ -24,7 +24,7 @@ end
 file "/root/git_wrapper.sh" do
   mode "0755"
   atomic_update true
-  content "#!/bin/sh\nexec /usr/bin/ssh -i -o \"StrictHostKeyChecking no\" /root/.ssh/id_rsa \"$@\""
+  content "#!/bin/sh\nexec /usr/bin/ssh -i -o StrictHostKeyChecking=no /root/.ssh/id_rsa \"$@\""
 end
 
 directory "#{node[:deployment_path]}" do

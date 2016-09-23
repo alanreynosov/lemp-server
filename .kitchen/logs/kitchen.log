@@ -1,0 +1,29 @@
+I, [2016-08-06T16:07:08.236782 #43720]  INFO -- Kitchen: -----> Starting Kitchen (v1.8.0)
+E, [2016-08-06T16:07:08.237109 #43720] ERROR -- Kitchen: ------Exception-------
+E, [2016-08-06T16:07:08.237172 #43720] ERROR -- Kitchen: Class: Kitchen::UserError
+E, [2016-08-06T16:07:08.237241 #43720] ERROR -- Kitchen: Message: Kitchen YAML file /Users/alanreynosovega/cookbooks/cookbooks/.kitchen.yml does not exist.
+E, [2016-08-06T16:07:08.237263 #43720] ERROR -- Kitchen: ------Backtrace-------
+E, [2016-08-06T16:07:08.237278 #43720] ERROR -- Kitchen: /opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/test-kitchen-1.8.0/lib/kitchen/loader/yaml.rb:74:in `read'
+E, [2016-08-06T16:07:08.237292 #43720] ERROR -- Kitchen: /opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/test-kitchen-1.8.0/lib/kitchen/config.rb:149:in `data'
+E, [2016-08-06T16:07:08.237306 #43720] ERROR -- Kitchen: /opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/test-kitchen-1.8.0/lib/kitchen/config.rb:128:in `suites'
+E, [2016-08-06T16:07:08.237319 #43720] ERROR -- Kitchen: /opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/test-kitchen-1.8.0/lib/kitchen/config.rb:179:in `filter_instances'
+E, [2016-08-06T16:07:08.237333 #43720] ERROR -- Kitchen: /opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/test-kitchen-1.8.0/lib/kitchen/config.rb:138:in `build_instances'
+E, [2016-08-06T16:07:08.237346 #43720] ERROR -- Kitchen: /opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/test-kitchen-1.8.0/lib/kitchen/config.rb:114:in `instances'
+E, [2016-08-06T16:07:08.237360 #43720] ERROR -- Kitchen: /opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/test-kitchen-1.8.0/lib/kitchen/command.rb:115:in `filtered_instances'
+E, [2016-08-06T16:07:08.237373 #43720] ERROR -- Kitchen: /opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/test-kitchen-1.8.0/lib/kitchen/command.rb:145:in `parse_subcommand'
+E, [2016-08-06T16:07:08.237386 #43720] ERROR -- Kitchen: /opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/test-kitchen-1.8.0/lib/kitchen/command/action.rb:38:in `block in call'
+E, [2016-08-06T16:07:08.237399 #43720] ERROR -- Kitchen: /opt/chefdk/embedded/lib/ruby/2.1.0/benchmark.rb:279:in `measure'
+E, [2016-08-06T16:07:08.237412 #43720] ERROR -- Kitchen: /opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/test-kitchen-1.8.0/lib/kitchen/command/action.rb:37:in `call'
+E, [2016-08-06T16:07:08.237425 #43720] ERROR -- Kitchen: /opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/test-kitchen-1.8.0/lib/kitchen/cli.rb:56:in `perform'
+E, [2016-08-06T16:07:08.237438 #43720] ERROR -- Kitchen: /opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/test-kitchen-1.8.0/lib/kitchen/cli.rb:180:in `block (2 levels) in <class:CLI>'
+E, [2016-08-06T16:07:08.237451 #43720] ERROR -- Kitchen: /opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/thor-0.19.1/lib/thor/command.rb:27:in `run'
+E, [2016-08-06T16:07:08.237464 #43720] ERROR -- Kitchen: /opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/thor-0.19.1/lib/thor/invocation.rb:126:in `invoke_command'
+E, [2016-08-06T16:07:08.237477 #43720] ERROR -- Kitchen: /opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/test-kitchen-1.8.0/lib/kitchen/cli.rb:321:in `invoke_task'
+E, [2016-08-06T16:07:08.237490 #43720] ERROR -- Kitchen: /opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/thor-0.19.1/lib/thor.rb:359:in `dispatch'
+E, [2016-08-06T16:07:08.237528 #43720] ERROR -- Kitchen: /opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/thor-0.19.1/lib/thor/base.rb:440:in `start'
+E, [2016-08-06T16:07:08.237542 #43720] ERROR -- Kitchen: /opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/test-kitchen-1.8.0/bin/kitchen:13:in `block in <top (required)>'
+E, [2016-08-06T16:07:08.237556 #43720] ERROR -- Kitchen: /opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/test-kitchen-1.8.0/lib/kitchen/errors.rb:154:in `with_friendly_errors'
+E, [2016-08-06T16:07:08.237569 #43720] ERROR -- Kitchen: /opt/chefdk/embedded/lib/ruby/gems/2.1.0/gems/test-kitchen-1.8.0/bin/kitchen:13:in `<top (required)>'
+E, [2016-08-06T16:07:08.237583 #43720] ERROR -- Kitchen: /opt/chefdk/bin/kitchen:17:in `load'
+E, [2016-08-06T16:07:08.237595 #43720] ERROR -- Kitchen: /opt/chefdk/bin/kitchen:17:in `<main>'
+E, [2016-08-06T16:07:08.237608 #43720] ERROR -- Kitchen: ----------------------
