@@ -12,8 +12,11 @@ Chef::Log.info("********** The app's URL is '#{app['app_source']['url']}' ******
 
 appdata = app.to_yaml
 
-file '/home/ubuntu/deployment.yml' do
-  content appdata
+file '/root/.ssh/config' do
+  content "Host *
+    StrictHostKeyChecking no
+  "
+  mode "0400"
 end
 
 file '/root/.ssh/id_rsa' do
