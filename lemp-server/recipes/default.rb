@@ -48,7 +48,7 @@ end
   user  'root'
 end
 
-directory "#{node[:nginx_document_root]}" do
+directory "#{node[:nginx_document_root]}/wp-content" do
   owner 'www-data'
   group 'www-data'
   mode '0755'
