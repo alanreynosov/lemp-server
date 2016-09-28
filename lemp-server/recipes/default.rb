@@ -56,6 +56,10 @@ directory "#{node[:nginx_document_root]}/wp-content" do
   action :create
 end
 
+package 'awscli' do
+  action 'install'
+end
+
 package 'nginx' do
 	action 'install'
 end
@@ -81,10 +85,17 @@ package ['php5-gd'] do
   action :install
 end
 
-package ['php5-curl'] do
+package 'php5-curl' do
 	action :install
 end
 
+package 'php5-memcached' do
+  action :install
+end
+
+package 'memcached' do
+  action :install
+end
 
 package 'php5-fpm' do
 	action :install
