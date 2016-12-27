@@ -119,23 +119,14 @@ end
   notifies :run, 'execute[chown-data-www]', :immediately
 end
 
-template '/srv/www/current/wp-config.php' do
-  source "wp-config.php.erb"
-  variables config: node["wp_conf"]
-  atomic_update true
-end
+# template '/srv/www/current/wp-config.php' do
+#   source "wp-config.php.erb"
+#   variables config: node["wp_conf"]
+#   atomic_update true
+# end
 
 execute "chown-data-www" do
   command "chown -R www-data:www-data /srv/www/current/wp-content"
   user "root"
   action :run
 end
-
-# directory "change_permissions" do
-#   owner 'www-data'
-#   group 'www-data'
-#   mode '0o755'
-#   recursive true
-#   action :create
-#   path "#{node[:nginx_document_root]}/wp-content/"
-# end
