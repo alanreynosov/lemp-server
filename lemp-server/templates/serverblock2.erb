@@ -1,0 +1,63 @@
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    root <%= node[:nginx_document_root] %>;
+
+    access_log   /var/log/nginx/<%= node[:nginx_host_name] %>.access.log;
+    error_log    /var/log/nginx/<%= node[:nginx_host_name] %>.error.log;
+
+    index index.html index.php index.htm;
+
+    server_name <%= node[:nginx_host_name] %>;
+
+    set $cache_uri $request_uri;
+
+    # POST requests and urls with a query string should always go to PHP
+    if ($request_method = POST) {
+            set $cache_uri 'null cache';
+    }
+    if ($query_string != "") {
+            set $cache_uri 'null cache';
+    }
+
+    # Don't use the cache for logged in users or recent commenters
+    if ($http_cookie ~* "comment_author|wordpress_[a-f0-9]+|wp-postpass|wordpress_logged_in") {
+       set $cache_uri 'null cache';
+    }
+
+    if ($request_uri ~* "(/customize.php|/wp-admin/|/xmlrpc.php|/wp-(app|cron|login|register|mail).php|wp-.*.php|/feed/|index.php|wp-comments-popup.php|wp-links-opml.php|wp-locations.php|sitemap(_index)?.xml|[a-z0-9_-]+-sitemap([0-9]+)?.xml)") {
+            set $cache_uri 'null cache';
+    }
+
+    location / {
+            try_files /wp-content/cache/supercache/$http_host/$cache_uri/index.html $uri $uri/ /index.php ;
+    }
+
+    location ~* /(?:uploads|files)/.*.php$ {
+        deny all;
+        access_log off;
+        log_not_found off;
+    }
+
+    location = /xmlrpc.php {
+        deny all;
+        access_log off;
+        log_not_found off;
+     }
+
+    location = /robots.txt {
+                allow all;
+                log_not_found off;
+                access_log off;
+        }
+
+    location ~ \.php$ {
+            try_files $uri =404;
+            fastcgi_split_path_info ^(.+\.php)(/.+)$;
+            fastcgi_pass unix:/var/run/php5-fpm.sock;
+            fastcgi_index index.php;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+            include fastcgi_params;
+    }
+}
