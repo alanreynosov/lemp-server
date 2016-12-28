@@ -115,7 +115,7 @@ end
   ssh_wrapper '/root/git_wrapper.sh'
   action :deploy
   user  'root'
-  branch "cleaned_template"
+  branch "master"
   notifies :run, 'execute[chown-data-www]', :immediately
   notifies :run, 'bash[update_current_path]', :immediately
 end
