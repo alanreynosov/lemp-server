@@ -139,7 +139,9 @@ bash 'update_current_path' do
   code <<-EOH
     realpath="$(readlink /srv/www/current)";
     currentpath="/srv/www/current";
-    sudo grep -rl $realpath $currentpath | xargs sudo sed -i "s~$realpath~$currentpath~g"    
+    sudo grep -rl $realpath $currentpath | xargs -r sudo sed -i "s~$realpath~$currentpath~g"    
   EOH
   action :run
 end
+
+
