@@ -38,6 +38,9 @@ end
 
 appdata = app.to_yaml
 
+file '/tmp/dumpconf' do
+  content appdata
+end
 
 package 'awscli' 
 package 'nginx'
@@ -54,6 +57,7 @@ package 'php5-readline'
 package 'php5-mysql'
 package 'mysql-client'
 package 'vim'
+package 'zip'
 
 file '/etc/nginx/sites-enabled/default' do 
   action 'delete'
@@ -105,20 +109,20 @@ directory "#{node[:deployment_path]}" do
    action :create
 end
 
- deploy 'private_repo' do
-  symlink_before_migrate.clear
-  create_dirs_before_symlink.clear
-  purge_before_symlink.clear
-  symlinks.clear
-  repo "#{app['app_source']['url']}"
-  deploy_to "#{node[:deployment_path]}"
-  ssh_wrapper '/root/git_wrapper.sh'
-  action :deploy
-  user  'root'
-  branch "master"
-  notifies :run, 'execute[chown-data-www]', :immediately
-  notifies :run, 'bash[update_current_path]', :immediately
-end
+#  deploy 'private_repo' do
+#   symlink_before_migrate.clear
+#   create_dirs_before_symlink.clear
+#   purge_before_symlink.clear
+#   symlinks.clear
+#   repo "#{app['app_source']['url']}"
+#   deploy_to "#{node[:deployment_path]}"
+#   ssh_wrapper '/root/git_wrapper.sh'
+#   action :deploy
+#   user  'root'
+#   branch "master"
+#   notifies :run, 'execute[chown-data-www]', :immediately
+#   notifies :run, 'bash[update_current_path]', :immediately
+# end
 
 if(node.environment == "kitchen")
     template '/srv/www/current/wp-config.php' do
