@@ -20,7 +20,7 @@ end
 
 bash 'unzip_build' do
   code <<-EOH
-    tar -xvf /srv/www/#{newbuild}.tar.gz
+    tar -xvf /srv/www/#{newbuild}.tar.gz /srv/www/
     EOH
 end
 
