@@ -18,25 +18,25 @@ bash 'download_build' do
     EOH
 end
 
-bash 'rename_document_root' do
+bash 'move_old_document_root' do
   code <<-EOH
     mv /srv/www/current /srv/www/#{oldbuild}
-    mv /srv/www/#{newbuild} /srv/www/current
   EOH
-  notifies :run, 'execute[chown-data-www]', :immediately
+  not_if { !File.exist?("/srv/www/current") }
 end
 
 bash 'unzip_build' do
   code <<-EOH
     tar -xvf /srv/www/#{newbuild}.tar.gz -C /srv/www/
     EOH
+  notifies :run, 'execute[chown-data-www]', :immediately
 end
 
-bash 'unzip_build' do
+bash 'update_assets' do
   code <<-EOH
     export AWS_ACCESS_KEY_ID=#{app[:environment][:AWS_ACCESS_KEY_ID]}; export AWS_SECRET_ACCESS_KEY=#{app[:environment][:AWS_SECRET_ACCESS_KEY]};
     aws s3 sync s3://assets.elpinerodelacuenca.com.mx/* /srv/www/#{newbuild} --exclude="*.php" --exclude="*.html" --exclude="*.gz" --exclude=".git/*" --exclude=".htaccess" --exclude="*.txt" --exclude=".gitignore"
-    EOH
+  EOH
 end
 
 execute "chown-data-www" do
