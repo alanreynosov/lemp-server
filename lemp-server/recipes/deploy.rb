@@ -45,6 +45,13 @@ execute "chown-data-www" do
   action :run
 end
 
+bash 'remove_old' do
+  code <<-EOH
+    rm -rf /srv/www/#{oldbuild}
+  EOH
+  not_if { File.exist?("/srv/www/#{oldbuild}") }
+end
+
 
 service 'nginx' do
 	action :restart
