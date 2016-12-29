@@ -7,7 +7,7 @@
 app = search("aws_opsworks_app").first
 
 newbuild = "#{app[:environment][:build]}#{app[:environment][:build_number]}"
-old_number = app[:environment][:build_number]-1
+old_number = app[:environment][:build_number].to_i-1.to_i
 oldbuild = "#{app[:environment][:build]}#{old_number}"
 
 s3_file "/srv/www/#{newbuild}.tar.gz" do
