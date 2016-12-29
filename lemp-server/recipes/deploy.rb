@@ -14,7 +14,7 @@ oldbuild = "#{app[:environment][:build]}#{old_number}"
 bash 'download_build' do
   code <<-EOH
     export AWS_ACCESS_KEY_ID=#{app[:environment][:AWS_ACCESS_KEY_ID]}; export AWS_SECRET_ACCESS_KEY=#{app[:environment][:AWS_SECRET_ACCESS_KEY]};
-    aws cp s3://#{app[:environment][:build_bucket]}/#{newbuild}.tar.gz /srv/www/#{newbuild} 
+    aws s3 cp s3://#{app[:environment][:build_bucket]}/#{newbuild}.tar.gz /srv/www/
     EOH
 end
 
