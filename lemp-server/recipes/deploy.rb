@@ -4,7 +4,6 @@
 #
 # Copyright (c) 2016 The Authors, All Rights Reserved.
 
-include_recipe "s3_file"
 
 app = search("aws_opsworks_app").first
 
@@ -12,16 +11,11 @@ newbuild = "#{app[:environment][:build]}#{app[:environment][:build_number]}"
 old_number = app[:environment][:build_number].to_i-1.to_i
 oldbuild = "#{app[:environment][:build]}#{old_number}"
 
-s3_file "/srv/www/#{newbuild}.tar.gz" do
-    remote_path "#{newbuild}.tar.gz"
-    bucket "#{app[:environment][:build_bucket]}"
-    aws_access_key_id "#{app[:environment][:AWS_ACCESS_KEY_ID]}"
-    aws_secret_access_key "#{app[:environment][:AWS_SECRET_ACCESS_KEY]}"
-    s3_url "https://s3.amazonaws.com/#{app[:environment][:build_bucket]}"
-    owner "root"
-    group "root"
-    mode "0644"
-    action :create
+bash 'download_build' do
+  code <<-EOH
+    export AWS_ACCESS_KEY_ID=#{app[:environment][:AWS_ACCESS_KEY_ID]}; export AWS_SECRET_ACCESS_KEY=#{app[:environment][:AWS_SECRET_ACCESS_KEY]};
+    aws cp s3://#{app[:environment][:build_bucket]}/#{newbuild}.tar.gz /srv/www/#{newbuild} 
+    EOH
 end
 
 bash 'unzip_build' do
