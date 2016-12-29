@@ -42,7 +42,7 @@ file '/tmp/dumpconf' do
   content appdata
 end
 
-package 'awscli' 
+package 'python-pip' 
 package 'nginx'
 package "php5" 
 package 'php5-common' 
@@ -58,6 +58,12 @@ package 'php5-mysql'
 package 'mysql-client'
 package 'vim'
 package 'zip'
+
+bash 'install_aws_cli' do
+  code <<-EOH
+    pip install awscli
+    EOH
+end
 
 file '/etc/nginx/sites-enabled/default' do 
   action 'delete'
