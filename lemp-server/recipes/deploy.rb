@@ -4,6 +4,8 @@
 #
 # Copyright (c) 2016 The Authors, All Rights Reserved.
 
+include_recipe "s3_file"
+
 app = search("aws_opsworks_app").first
 
 newbuild = "#{app[:environment][:build]}#{app[:environment][:build_number]}"
