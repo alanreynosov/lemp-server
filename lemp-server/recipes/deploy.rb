@@ -34,11 +34,11 @@ bash 'unzip_build' do
     EOH
 end
 
-batch 'rename_document_root' do
+bash 'rename_document_root' do
   code <<-EOH
     mv /srv/www/current /srv/www/#{oldbuild}
     mv /srv/www/#{newbuild} /srv/www/current
-    EOH
-  notifies :restart , service "nginx" , :immediately 
-  notifies :restart , service "php5-fpm" , :immediately 
+  EOH
+  notifies :restart, 'service[nginx]', :immediately
+  notifies :restart, 'service[php5-fpm]', :immediately
 end
