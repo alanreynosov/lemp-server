@@ -132,12 +132,6 @@ if(node.environment == "kitchen")
     end
 end
 
-execute "chown-data-www" do
-  command "chown -R www-data:www-data /srv/www/current/wp-content"
-  user "root"
-  action :run
-end
-
 
 # bash 'update_current_path' do
 #   code <<-EOH

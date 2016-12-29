@@ -36,7 +36,15 @@ bash 'rename_document_root' do
     mv /srv/www/current /srv/www/#{oldbuild}
     mv /srv/www/#{newbuild} /srv/www/current
   EOH
+  notifies :run, 'execute[chown-data-www]', :inmediately
 end
+
+execute "chown-data-www" do
+  command "chown -R www-data:www-data /srv/www/current/wp-content"
+  user "root"
+  action :run
+end
+
 
 service 'nginx' do
 	action :restart
