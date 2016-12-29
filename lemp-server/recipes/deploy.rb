@@ -36,7 +36,7 @@ bash 'rename_document_root' do
     mv /srv/www/current /srv/www/#{oldbuild}
     mv /srv/www/#{newbuild} /srv/www/current
   EOH
-  notifies :run, 'execute[chown-data-www]', :inmediately
+  notifies :run, 'execute[chown-data-www]', :immediately
 end
 
 execute "chown-data-www" do
