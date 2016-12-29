@@ -39,6 +39,15 @@ bash 'rename_document_root' do
     mv /srv/www/current /srv/www/#{oldbuild}
     mv /srv/www/#{newbuild} /srv/www/current
   EOH
-  notifies :restart, 'service[nginx]', :immediately
-  notifies :restart, 'service[php5-fpm]', :immediately
+end
+
+service 'nginx' do
+	action :restart
+end
+
+service 'php5-fpm' do
+  action :stop
+end
+service 'php5-fpm' do
+	action :start
 end
