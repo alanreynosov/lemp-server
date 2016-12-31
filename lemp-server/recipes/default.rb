@@ -65,6 +65,13 @@ bash 'install_aws_cli' do
     EOH
 end
 
+bash 'install_ngxtop' do
+  code <<-EOH
+    pip install ngxtop
+    EOH
+end
+
+
 file '/etc/nginx/sites-enabled/default' do 
   action 'delete'
 end
