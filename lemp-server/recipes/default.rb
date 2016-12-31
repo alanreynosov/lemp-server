@@ -88,6 +88,17 @@ template "/etc/nginx/sites-available/#{node[:nginx_host_name]}.conf" do
   source "serverblock2.erb"	
 end
 
+template "/etc/nginx/nginx.conf" do
+  source "nginx.conf" 
+  atomic_update true
+end
+
+template "/etc/php5/fpm/php.ini" do
+  source "php.ini" 
+  atomic_update true
+end
+
+
 link "/etc/nginx/sites-enabled/#{node[:nginx_host_name]}.conf" do
   to "/etc/nginx/sites-available/#{node[:nginx_host_name]}.conf"
 end
