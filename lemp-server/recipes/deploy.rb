@@ -39,6 +39,13 @@ bash 'update_assets' do
   EOH
 end
 
+execute "fix-mod" do
+  command "sudo chmod 755 current"
+  user "root"
+  action :run
+end
+
+
 execute "chown-data-www" do
   command "chown -R www-data:www-data /srv/www/current/wp-content"
   user "root"
