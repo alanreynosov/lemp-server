@@ -35,7 +35,7 @@ end
 bash 'update_assets' do
   code <<-EOH
     export AWS_ACCESS_KEY_ID=#{app[:environment][:AWS_ACCESS_KEY_ID]}; export AWS_SECRET_ACCESS_KEY=#{app[:environment][:AWS_SECRET_ACCESS_KEY]};
-    aws s3 sync s3://assets.elpinerodelacuenca.com.mx/* /srv/www/#{newbuild} --exclude="*.php" --exclude="*.html" --exclude="*.gz" --exclude=".git/*" --exclude=".htaccess" --exclude="*.txt" --exclude=".gitignore"
+    aws s3 sync s3://#{app[:environment][:assets_bucket]}/* /srv/www/#{newbuild} --exclude="*.php" --exclude="*.html" --exclude="*.gz" --exclude=".git/*" --exclude=".htaccess" --exclude="*.txt" --exclude=".gitignore"
   EOH
 end
 
