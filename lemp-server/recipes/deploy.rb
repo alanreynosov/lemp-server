@@ -60,7 +60,7 @@ bash 'remove_old' do
 end
 
 bash 'flush_cache' do
-  cwd "#{node[:deployment_path]}"
+  cwd "#{node[:deployment_path]}/current"
   user "www-data"
   code <<-EOH
     wp super-cache flush;
