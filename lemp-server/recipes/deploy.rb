@@ -59,6 +59,14 @@ bash 'remove_old' do
   not_if { !File.exist?("/srv/www/#{oldbuild}") }
 end
 
+bash 'flush_cache' do
+  cwd "#{node[:deployment_path]}"
+  code <<-EOH
+    wp super-cache flush;
+    wp super-cache preload;
+    EOH
+    not_if { File.exist?("/srv/www/wp-cli.phar") }
+end
 
 service 'nginx' do
 	action :restart
