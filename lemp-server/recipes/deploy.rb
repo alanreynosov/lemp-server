@@ -61,6 +61,7 @@ end
 
 bash 'flush_cache' do
   cwd "#{node[:deployment_path]}"
+  user "www-data"
   code <<-EOH
     wp super-cache flush;
     wp super-cache preload;
