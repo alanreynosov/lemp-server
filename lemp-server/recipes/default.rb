@@ -71,6 +71,17 @@ bash 'install_ngxtop' do
     EOH
 end
 
+bash 'install_wp_cli' do
+  cwd '/tmp'
+  code <<-EOH
+    curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar;
+    chmod +x wp-cli.phar;
+    mv wp-cli.phar /usr/local/bin/wp;
+    wp package install https://github.com/wp-cli/wp-super-cache-cli.git
+    EOH
+    not_if { File.exist?("/srv/www/wp-cli.phar") }
+end
+
 
 file '/etc/nginx/sites-enabled/default' do 
   action 'delete'
