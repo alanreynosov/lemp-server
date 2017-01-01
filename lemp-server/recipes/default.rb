@@ -77,7 +77,7 @@ bash 'install_wp_cli' do
     curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar;
     chmod +x wp-cli.phar;
     mv wp-cli.phar /usr/local/bin/wp;
-    wp package install https://github.com/wp-cli/wp-super-cache-cli.git
+    wp package install https://github.com/wp-cli/wp-super-cache-cli.git --allow-root
     EOH
     not_if { File.exist?("/srv/www/wp-cli.phar") }
 end
