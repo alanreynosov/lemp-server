@@ -43,6 +43,7 @@ file '/tmp/dumpconf' do
 end
 
 package 'python-pip' 
+package 'curl' 
 package 'nginx'
 package "php5" 
 package 'php5-common' 
@@ -149,38 +150,5 @@ directory "#{node[:deployment_path]}" do
    mode '0755'
    action :create
 end
-
-#  deploy 'private_repo' do
-#   symlink_before_migrate.clear
-#   create_dirs_before_symlink.clear
-#   purge_before_symlink.clear
-#   symlinks.clear
-#   repo "#{app['app_source']['url']}"
-#   deploy_to "#{node[:deployment_path]}"
-#   ssh_wrapper '/root/git_wrapper.sh'
-#   action :deploy
-#   user  'root'
-#   branch "master"
-#   notifies :run, 'execute[chown-data-www]', :immediately
-#   notifies :run, 'bash[update_current_path]', :immediately
-# end
-
-if(node.environment == "kitchen")
-    template '/srv/www/current/wp-config.php' do
-      source "wp-config.php.erb"
-      variables config: node["wp_conf"]
-      atomic_update true
-    end
-end
-
-
-# bash 'update_current_path' do
-#   code <<-EOH
-#     realpath="$(readlink /srv/www/current)";
-#     currentpath="/srv/www/current";
-#     sudo grep -rl $realpath $currentpath | xargs -r sudo sed -i "s~$realpath~$currentpath~g"    
-#   EOH
-#   action :run
-# end
 
 
