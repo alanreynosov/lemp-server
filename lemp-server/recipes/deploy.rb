@@ -5,7 +5,38 @@
 # Copyright (c) 2016 The Authors, All Rights Reserved.
 
 
-app = search("aws_opsworks_app").first
+
+
+if node.environment != "kitchen" 
+  app = search("aws_opsworks_app").first
+  Chef::Log.info("********** The app's short name is '#{app['app_source']['url']}' **********")
+  Chef::Log.info("********** The app's URL is '#{app['app_source']['url']}' **********")
+
+  file '/root/.ssh/id_rsa' do
+  content "#{app['app_source']['ssh_key']}"
+  mode '600'
+  end
+
+else
+  
+  package 'git'
+
+  directory '/root/.ssh/' do
+    owner 'root'
+    group 'root'
+    mode '0755'
+    action :create
+  end
+  
+  app = node["app"]
+
+  template '/root/.ssh/id_rsa' do
+    source "gitkey.erb"
+    mode '600'
+  end
+end
+
+log app[:environment][:AWS_ACCESS_KEY_ID]
 
 newbuild = "#{app[:environment][:build]}#{app[:environment][:build_number]}"
 old_number = app[:environment][:build_number].to_i-1.to_i
@@ -39,12 +70,6 @@ bash 'update_assets' do
   EOH
 end
 
-# execute "fix-mod" do
-#   command "sudo chmod 755 current "
-#   user "root"
-#   action :run
-# end
-
 
 execute "chown-data-www" do
   command "chown -R www-data:www-data /srv/www/current/wp-content"
@@ -66,24 +91,27 @@ bash 'remove_old' do
   EOH
 end
 
+if(node.environment == "kitchen")
+    template '/srv/www/current/wp-config.php' do
+      source "wp-config.php.erb"
+      variables config: node["wp_conf"]
+      atomic_update true
+    end
+end
 
-# bash 'flush_cache' do
-#   cwd "#{node[:deployment_path]}/current"
-#   user "www-data"
-#   code <<-EOH
-#     wp super-cache flush;
-#     wp super-cache preload;
-#     EOH
-#     not_if { File.exist?("/srv/www/wp-cli.phar") }
-# end
 
 service 'nginx' do
-	action :restart
+  action :restart
 end
 
 service 'php5-fpm' do
   action :stop
 end
 service 'php5-fpm' do
-	action :start
+  action :start
 end
+
+
+
+
+
