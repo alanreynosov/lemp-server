@@ -41,9 +41,6 @@ end
 
 appdata = app.to_yaml
 
-file '/tmp/dumpconf' do
-  content appdata
-end
 
 package 'python-pip' 
 package 'curl' 
