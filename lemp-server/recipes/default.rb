@@ -18,7 +18,10 @@ if node.environment != "kitchen"
   end
 
 else
-  
+
+  package 'mysql-server'
+  service 'mysql-server'  
+
   package 'git'
 
   directory '/root/.ssh/' do
