@@ -47,6 +47,7 @@ bash 'download_build' do
     export AWS_ACCESS_KEY_ID=#{app[:environment][:AWS_ACCESS_KEY_ID]}; export AWS_SECRET_ACCESS_KEY=#{app[:environment][:AWS_SECRET_ACCESS_KEY]};
     aws s3 cp s3://#{app[:environment][:build_bucket]}/#{newbuild}.tar.gz /srv/www/
     EOH
+    not_if { File.exist?("/srv/www/current/#{newbuild}.tar.gz") }
 end
 
 bash 'move_old_document_root' do
