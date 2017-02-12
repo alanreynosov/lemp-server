@@ -7,7 +7,6 @@ server {
     access_log   /var/log/nginx/<%= node[:nginx_host_name] %>.access.log;
     error_log    /var/log/nginx/<%= node[:nginx_host_name] %>.error.log;
 
-    # Add index.php to the list if you are using PHP
     index index.html index.php index.htm;
 
     server_name <%= node[:nginx_host_name] %>;
@@ -27,32 +26,13 @@ server {
        set $cache_uri 'null cache';
     }
 
-
-    #    location ~* /wp-includes/.*.php$ {
-    #       deny all;
-    #       access_log off;
-    #       log_not_found off;
-    #    }
-
-    # Cache static files for as long as possible
-    location ~* .(ogg|ogv|svg|svgz|eot|otf|woff|mp4|ttf|css|rss|atom|js|jpg|jpeg|gif|png|ico|zip|tgz|gz|rar|bz2|doc|xls|exe|ppt|tar|mid|midi|wav|bmp|rtf)$ {
-        expires max; log_not_found off; access_log off;
-    }
-
     if ($request_uri ~* "(/customize.php|/wp-admin/|/xmlrpc.php|/wp-(app|cron|login|register|mail).php|wp-.*.php|/feed/|index.php|wp-comments-popup.php|wp-links-opml.php|wp-locations.php|sitemap(_index)?.xml|[a-z0-9_-]+-sitemap([0-9]+)?.xml)") {
             set $cache_uri 'null cache';
     }
 
-    # Don't use the cache for logged in users or recent commenters
-    #       if ($http_cookie ~* "comment_author|wordpress_[a-f0-9]+|wp-postpass|wordpress_logged_in") {
-    #               set $cache_uri 'null cache';
-    #       }
-
-
     location / {
             try_files /wp-content/cache/supercache/$http_host/$cache_uri/index.html $uri $uri/ /index.php ;
     }
-
 
     location ~* /(?:uploads|files)/.*.php$ {
         deny all;
@@ -60,25 +40,11 @@ server {
         log_not_found off;
     }
 
-    location = /xmlrpc.php {
-        deny all;
-        access_log off;
-        log_not_found off;
-     }
-
     location = /robots.txt {
                 allow all;
                 log_not_found off;
                 access_log off;
         }
-
- #    location / {
-        # First attempt to serve request as file, then
-        # as directory, then fall back to displaying a 404.
-        # try_files $uri $uri/ =404;
-        # autoindex on;
-#       try_files $uri $uri/ /index.php?$args;
- #    }
 
     location ~ \.php$ {
             try_files $uri =404;
@@ -88,6 +54,4 @@ server {
             fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
             include fastcgi_params;
     }
-
-
 }
