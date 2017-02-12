@@ -92,6 +92,7 @@ bash 'remove_old' do
   EOH
 end
 
+
 template '/srv/www/current/wp-config.php' do
   source "wp-config.php.erb"
   variables config: app[:environment]

@@ -18,7 +18,10 @@ if node.environment != "kitchen"
   end
 
 else
-  
+
+  package 'mysql-server'
+  service 'mysql-server'  
+
   package 'git'
 
   directory '/root/.ssh/' do
@@ -39,7 +42,8 @@ end
 appdata = app.to_yaml
 
 
-package 'awscli' 
+package 'python-pip' 
+package 'curl' 
 package 'nginx'
 package "php5" 
 package 'php5-common' 
@@ -54,6 +58,37 @@ package 'php5-readline'
 package 'php5-mysql'
 package 'mysql-client'
 package 'vim'
+package 'zip'
+
+bash 'install_aws_cli' do
+  code <<-EOH
+    pip install awscli
+    EOH
+end
+
+bash 'install_ngxtop' do
+  code <<-EOH
+    pip install ngxtop
+    EOH
+end
+
+bash 'install_wp_cli' do
+  cwd '/tmp'
+  code <<-EOH
+    curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar;
+    chmod +x wp-cli.phar;
+    mv wp-cli.phar /usr/local/bin/wp;
+    EOH
+    not_if { File.exist?("/srv/www/wp-cli.phar") }
+end
+
+bash 'install_wp_cli_supercache' do
+  cwd '/tmp'
+  code <<-EOH
+  wp package install https://github.com/wp-cli/wp-super-cache-cli.git --allow-root
+  EOH
+end
+
 
 file '/etc/nginx/sites-enabled/default' do 
   action 'delete'
@@ -65,11 +100,22 @@ end
 
 package ['php5-mysql'] do
 	action :install
-end
+end 
 
 template "/etc/nginx/sites-available/#{node[:nginx_host_name]}.conf" do
   source "serverblock2.erb"	
 end
+
+template "/etc/nginx/nginx.conf" do
+  source "nginx.conf" 
+  atomic_update true
+end
+
+template "/etc/php5/fpm/php.ini" do
+  source "php.ini" 
+  atomic_update true
+end
+
 
 link "/etc/nginx/sites-enabled/#{node[:nginx_host_name]}.conf" do
   to "/etc/nginx/sites-available/#{node[:nginx_host_name]}.conf"
@@ -86,18 +132,6 @@ service 'php5-fpm' do
 	action :start
 end
 
-file '/root/.ssh/config' do
-  content "Host *
-    StrictHostKeyChecking no
-  "
-  mode "0400"
-end
-
-file "/root/git_wrapper.sh" do
-  mode "0755"
-  content "#!/bin/sh\nexec /usr/bin/ssh -i /root/.ssh/id_rsa \"$@\""
-end
-
 directory "#{node[:deployment_path]}" do
    owner "#{node[:nginx_user]}"
    group "#{node[:nginx_group]}"
@@ -105,23 +139,9 @@ directory "#{node[:deployment_path]}" do
    action :create
 end
 
-# deploy 'private_repo' do
-#   symlink_before_migrate.clear
-#   create_dirs_before_symlink.clear
-#   purge_before_symlink.clear
-#   symlinks.clear
-#   repo "#{app['app_source']['url']}"
-#   deploy_to "#{node[:deployment_path]}"
-#   ssh_wrapper '/root/git_wrapper.sh'
-#   action :deploy
-#   user  'root'
-#   branch "cleaned_template"
-#   notifies :run, 'execute[chown-data-www]', :immediately
-# end
-
 template '/srv/www/current/wp-config.php' do
   source "wp-config.php.erb"
-  variables config: node["wp_conf"]
+  variables config: app[:environment]
   atomic_update true
 end
 
@@ -131,11 +151,4 @@ execute "chown-data-www" do
   action :run
 end
 
-# directory "change_permissions" do
-#   owner 'www-data'
-#   group 'www-data'
-#   mode '0o755'
-#   recursive true
-#   action :create
-#   path "#{node[:nginx_document_root]}/wp-content/"
-# end
+
