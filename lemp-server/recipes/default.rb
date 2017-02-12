@@ -105,19 +105,19 @@ directory "#{node[:deployment_path]}" do
    action :create
 end
 
- deploy 'private_repo' do
-  symlink_before_migrate.clear
-  create_dirs_before_symlink.clear
-  purge_before_symlink.clear
-  symlinks.clear
-  repo "#{app['app_source']['url']}"
-  deploy_to "#{node[:deployment_path]}"
-  ssh_wrapper '/root/git_wrapper.sh'
-  action :deploy
-  user  'root'
-  branch "cleaned_template"
-  notifies :run, 'execute[chown-data-www]', :immediately
-end
+# deploy 'private_repo' do
+#   symlink_before_migrate.clear
+#   create_dirs_before_symlink.clear
+#   purge_before_symlink.clear
+#   symlinks.clear
+#   repo "#{app['app_source']['url']}"
+#   deploy_to "#{node[:deployment_path]}"
+#   ssh_wrapper '/root/git_wrapper.sh'
+#   action :deploy
+#   user  'root'
+#   branch "cleaned_template"
+#   notifies :run, 'execute[chown-data-www]', :immediately
+# end
 
 template '/srv/www/current/wp-config.php' do
   source "wp-config.php.erb"
