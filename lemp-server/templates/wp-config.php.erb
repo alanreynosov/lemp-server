@@ -27,15 +27,15 @@ define( 'DBI_AWS_ACCESS_KEY_ID', '<%= @config["AWS_ACCESS_KEY_ID"] %>' );
 define( 'DBI_AWS_SECRET_ACCESS_KEY','<%=  @config["AWS_SECRET_ACCESS_KEY"] %>'  );
 
 /** The name of the database for WordPress */
-define('DB_NAME', '<%=  @config["DB_NAME"] %>');
+define('DB_NAME', '<%=  @config["dbname"] %>');
 
 /** MySQL database username */
-define('DB_USER', '<%=  @config["DB_USER"] %>');
+define('DB_USER', '<%=  @config["dbuser"] %>');
 /** MySQL database password */
-define('DB_PASSWORD', '<%=  @config["DB_PASSWORD"] %>');
+define('DB_PASSWORD', '<%=  @config["dbpassword"] %>');
 
 /** MySQL hostname */
-define('DB_HOST', '<%=  @config["DB_HOST"] %>');
+define('DB_HOST', '<%=  @config["dbhost"] %>');
 
 /** Database Charset to use in creating database tables. */
 define('DB_CHARSET', 'utf8');
