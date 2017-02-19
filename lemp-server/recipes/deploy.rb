@@ -85,7 +85,7 @@ bash 'remove_old' do
   EOH
 end
 
-file "/srv/www/current/status.php"
+file "/srv/www/current/status.php" do
   content "ok"
 end
 
