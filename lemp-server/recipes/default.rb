@@ -139,16 +139,5 @@ directory "#{node[:deployment_path]}" do
    action :create
 end
 
-template '/srv/www/current/wp-config.php' do
-  source "wp-config.php.erb"
-  variables config: app[:environment]
-  atomic_update true
-end
-
-execute "chown-data-www" do
-  command "chown -R www-data:www-data /srv/www/current/wp-content"
-  user "root"
-  action :run
-end
 
 
