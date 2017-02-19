@@ -85,6 +85,9 @@ bash 'remove_old' do
   EOH
 end
 
+file "/srv/www/current/status.php"
+  content "ok"
+end
 
 template '/srv/www/current/wp-config.php' do
   source "wp-config.php.erb"
@@ -108,7 +111,6 @@ end
 service 'php5-fpm' do
   action :start
 end
-
 
 
 
