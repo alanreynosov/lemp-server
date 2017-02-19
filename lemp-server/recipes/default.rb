@@ -139,5 +139,3 @@ directory "#{node[:deployment_path]}" do
    action :create
 end
 
-
-
